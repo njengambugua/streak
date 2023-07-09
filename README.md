@@ -1,7 +1,7 @@
 # streak-counter
 A streak counter project
 
-# [Demo](https://jitu-streak-counter.vercel.app/)
+# [Demo](http://localhost/streak-counter/index.php)
 
 ## Features
 - Add an activity
