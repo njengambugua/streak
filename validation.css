@@ -1,0 +1,118 @@
+*{
+    transition: all ease-in-out 0.5s;
+    box-sizing: border-box; 
+    font-family: 'Poppins', sans-serif;
+}
+main{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: rgb(0, 89, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+h2{
+    font-size: 2em;
+    color: #fff;
+}
+.header a{
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+.header a:hover{
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.header .btnn{
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+}
+.header .btnn:hover{
+    transform: scale(1.2);
+    color: cornflowerblue;
+}
+body{
+    background-image: -moz-linear-gradient(to right, rgb(3, 48, 146), rgb(21, 187, 151));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: solid 2px #fff;
+    width: 500px;
+    align-items: center;
+    height: 900px;
+    border-radius: 40px;
+}
+.btn{
+    background-color: rgb(12, 86, 155);
+    transition: transform 0.3s ease;
+    border-radius: 25px;
+    width: 75px;
+    padding: 15px 10px;
+    border: 1px solid rgb(60, 66, 155);
+}
+.btn:hover{
+    transform: scale(1.1);
+    background-color: rgb(165, 113, 36);
+    cursor: pointer;
+}
+#first_name, #last_name, #email, #password, #confirm_password{
+    border-radius: 30px;
+    text-align: center;
+    width: 250px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+.material-icons{
+    display: flex;
+    position: absolute;
+    color: black;
+    right: 10px;
+    top: 15px;
+    cursor: pointer;
+}
+#s{
+    z-index: 0;
+}
+#r{
+    z-index: 1000;
+}
+label{
+    margin-bottom: 30px;
+    text-align: center;
+}
+.z{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.err_msg{
+    color: red;
+}

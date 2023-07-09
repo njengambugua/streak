@@ -49,7 +49,7 @@ main{
     height: 100%;
 }
 .lower{ 
-    /* height: 66vh; */
+    height: 100%;
     background: black;
 }
 .best-streak{
@@ -70,9 +70,23 @@ img{
     height: 16em;
     display: flex;
 }
-.menu-icon{
-    display: flex;
-    align-content: space-evenly;
+
+.upper .add .btn{
+    background-color: rgb(12, 86, 155);
+    transition: transform 0.3s ease;
+    border-radius: 25px;
+    width: 75px;
+    padding: 15px 10px;
+    border: 1px solid rgb(60, 66, 155);
+    margin-right: 5em;
+}
+.upper .add .btn:hover{
+    transform: scale(1.5);
+    background-color: rgb(165, 113, 36);
+    cursor: pointer;
+}
+.upper .bi-box-arrow-right{
+    align-self: flex-start;
 }
 .bi{
     font-size: 3em;
@@ -86,10 +100,19 @@ img{
     display: flex;
     align-items: center;
 }
-.menu-icon
+.menu-icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .menu-icon .bi-list-task{
     font-size: 4.2em;
-    display: flex;
+}
+.menu-icon h4{
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 900;
 }
 .phone-icon{
     height: auto;
@@ -148,6 +171,18 @@ h3{
     padding: 1.2em;
     background-color: white;
 }
+.update-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 1.2em;
+    width: 100%;
+    padding: 1.2em;
+}
+label{
+    color: rgb(239, 109, 78);
+}
 .task-input{
     display: flex;
     flex-direction: column;
@@ -172,6 +207,9 @@ input{
 .add-task{
     background: rgb(239, 109, 78);
 }
+.update{
+    background: rgb(239, 109, 78);
+}
 h4{
     color: rgb(239, 109, 78);
 }
@@ -183,7 +221,7 @@ h4{
     gap: 1.2em;
     flex-wrap: wrap;
 }
-.best-streak #task{
+.best-streak .task{
     background: white;
     color: black;
     text-align: center;
@@ -210,13 +248,14 @@ h4{
 .overlay{
     display: grid;
     place-items: center;
-    z-index: 600;
+    z-index: 998;
     width: 100%;
     height: 100vh;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     transition: opacity 0.3s ease-in-out;
 }
 .overlay.show {
@@ -226,6 +265,13 @@ h4{
 .content.show {
     filter: blur(5px) grayscale(0.7);
 } 
+#updateform{
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    width: 50%;
+    background-color: white;
+}
 
 .modal {
     display: none;
@@ -299,8 +345,12 @@ h4{
   
 .modal .close-delete-btn .delete-modal {
     background-color: red;
+    margin-right: 3rem;
     animation-name: scale-close;
     animation-duration: 3s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+}
+.modal .close-delete-btn .update{
+    background-color: orange;
 }

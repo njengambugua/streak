@@ -1,25 +1,17 @@
 const icon =document.querySelector(".toggle-btn")
 const add = document.querySelector(".add");
 const cl = document.querySelector(".close");
-const taskForm = document.querySelector("#taskForm");
-const tasksList = document.querySelector("#task");
-const otherTaskslist = document.querySelector("#activity-section");
-const taskName = document.querySelector("#task-name").value;
-const imageUrl = document.querySelector("#im").value;
-const taskDate = document.querySelector("#date").value;
-let modal = document.querySelector(".modal");
-let errorMessage = document.querySelector(".error-message");
+const form= document.querySelector("form");
+const tasksList = document.querySelector(".task");
+// const otherTaskslist = document.querySelector("#activity-section");
+// // let taskName = document.querySelector("#task-name");
+// // let imageUrl = document.querySelector("#im");
+// // let taskDate = document.querySelector("#date");
+// let modal = document.querySelector(".modal");
+// let errorMessage = document.querySelector(".error-message");
 let activitySection = document.querySelector("#activity-section");
-let activityStatus = document.querySelector(".activity-status");
-let taskId = 1
-const taskArray = [];
-// const task = {
-//     id: taskId,
-//     name: taskName,
-//     Image: imageUrl,
-//     date: taskDate
-// }
-// console.log(task)
+// let activityStatus = document.querySelector(".activity-status");
+// let taskArray = [];
 
 icon.addEventListener("click",()=>{
     if (icon.className === "bi bi-plus-circle toggle-btn") {
@@ -33,143 +25,159 @@ icon.addEventListener("click",()=>{
     }
 })
 
-let bestStreak = null;
-
+// id 
+// window.location = ".delete.php?id= {$id}"
 taskForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    // addTask();
+    // event.preventDefault();
 
-    const taskName = document.querySelector("#task-name").value;
-    const imageUrl = document.querySelector("#im").value;
-    const taskDate = document.querySelector("#date").value;
+    // // task.id++;
+    // taskName = document.querySelector("#task-name").value;
+    // imageUrl = document.querySelector("#im").value;
+    // taskDate = document.querySelector("#date").value;
 
     const task = {
-        id: taskId,
+        id: Date.now(),
         name: taskName,
         image: imageUrl,
         date: taskDate
-    };
-
-    taskId++;
-    console.log(task);
-
-    taskArray.push(task)
-
-    clearForm()
-
-    if (isNewBestStreak(task.date)) {
-        addTaskToBestStreak(task);
-      } else {
-        addTaskToOtherStreaks(task);
-     }
+    }
     
-      document.getElementById('task-name').value = '';
-      document.getElementById('im').value = '';
-      document.getElementById('date').value = '';
+
+    // taskArray.push(task);
+
+//     // clearForm()
+    // document.getElementById('task-name').value = '';
+    // document.getElementById('im').value = '';
+    // document.getElementById('date').value = '';
+
+//     let bestStreak = new Date('9999-12-31');
+
+//     for (let i = 0; i < taskArray.length; i++) {
+//         const task = taskArray[i];
+//         const taskdate = new Date(task.date);
+
+//         if(taskdate<bestStreak){
+//             bestStreak = taskdate;
+//         }
+        
+//     }
+//     let taskWithEarliestDate = taskArray.find(task => new Date(task.date).getTime() === bestStreak.getTime());
+
+//     // console.log(taskWithEarliestDate);
+        
+//         addTaskToBestStreak(taskWithEarliestDate);
+ 
+//         addTaskToOtherStreaks(task);
 });
 
+// function addTaskToBestStreak(task) {
+//     // Create a new task element
+//     const taskElement = document.createElement('div');
+//     taskElement.classList.add('sep');
+//     taskElement.dataset.date = task.date;
+//     taskElement.setAttribute('id', task.id);
 
-function isNewBestStreak(date) {
-    // Get the current best streak date
-    const bestStreakDate = tasksList.children[0]?.dataset.date;
-  
-    // If there is no best streak or the new date is older, it is a new best streak
-    return !bestStreakDate || date < bestStreakDate;
-}
-
-
-function addTaskToBestStreak(task) {
-
-    if (bestStreak) {
-        addTaskToOtherStreaks(bestStreak);
-      }
-    
-      // Set the new best streak
-      bestStreak = task;    
-  
-    // Create a new task element
-    const taskElement = document.createElement('div');
-    taskElement.classList.add('task');
-    taskElement.dataset.date = task.date;
-  
-    // Set the task content
-    taskElement.innerHTML = `
-      <img src="${task.image}" alt="Task Image">
-      <h4>${task.name}</h4>
-      <p>${task.date}</p>
-    `;
-  
-    // Add the task to the best streak section
-    tasksList.innerHTML = '';
-    tasksList.appendChild(taskElement);
-}
+//     // Set the task content
+//     taskElement.innerHTML = `
+//     <img src="${task.image}" alt="Task Image">
+//     <h4>${task.name}</h4>
+//     <p>${task.date}</p>
+//     `
+//     // Add the task to the best streak section
+//     tasksList.innerHTML = '';
+//     tasksList.appendChild(taskElement);
+// }
 
 
-const createModal = (task)=>{
-    let itemsArray = Array.from(otherTaskslist.children)
+const createModal = ()=>{
+    let itemsArray = Array.from(activitySection.children)
     itemsArray.forEach((task)=>{
         task.addEventListener("click", ()=> {Modalcreate(task)});
+        // console.log(task);
     })
     tasksList.addEventListener("click", ()=> {Modalcreate(tasksList)});
 }
 
 const Modalcreate = (task) => {
     let taskDisplay = document.querySelector(".overlay")
-    let taskid = task.getAttribute("id");
+    let taskid = task.getAttribute('id');
     let taskImage = task.querySelector("img").getAttribute("src");
     let taskName = task.querySelector("h4").textContent;
     let taskDate = task.querySelector("p").textContent;
     let days = calculateNoOfDays(taskDate);
     let Modal = document.createElement('div');
-    Modal.classList.add('modal')
+    Modal.classList.add('modal');
 
     Modal.innerHTML = `
-    <div class="modal-image">
-        <img src="${taskImage}" alt="Task Image">
-    </div>
-    <h4 class="activity-name">${taskName}</h4>
-    <p class="date">${taskDate}</p>
-    <p class="time-passed">${days} days ago</p>
-    <div class="close-delete-btn">
-        <button class="btn close-modal" type="submit">CLOSE</button>
-        <button class="btn delete-modal" type="submit">DELETE</button>
-    </div>
-    `
+        <div class="modal-image">
+            <img src="${taskImage}" alt="Task Image">
+        </div>
+        <h4 class="activity-name">${taskName}</h4>
+        <p class="date">${taskDate}</p>
+        <p class="time-passed">${days} days ago</p>
+        <div class="close-delete-btn">
+            <button class="btn close-modal" type="submit">CLOSE</button>
+            <button class="btn delete-modal" type="submit">DELETE</button>
+            <button class="btn update" type="submit">UPDATE</button>
+        </div>`
 
       Modal.style.cssText = 'display: flex;';
       Modal.style.flexDirection = 'column';
-      Modal.style.background = 'white';
+    //   Modal.style.background = 'white';
       while(taskDisplay.firstChild){
         taskDisplay.removeChild(taskDisplay.firstChild)
       }
-
       taskDisplay.appendChild(Modal)
       let closeModal = document.querySelector(".close-modal")
       let deleteModal = document.querySelector(".delete-modal")
-      closeModal.addEventListener('click', ()=> {closeModalBtn()});
-      deleteModal.addEventListener('click', ()=> {delModalBtn()});
+      let update = document.querySelector(".update")
+      closeModal.addEventListener('click', ()=> {closeModalBtn(Modal)});
+      deleteModal.addEventListener('click', ()=> {delModalBtn(Modal,taskid)});
+      update.addEventListener('click', ()=>{updateform(Modal,form, taskid)});
+      
 }
 
-const closeModalBtn = () => {
-    return (modal.style.display = 'none');
+const closeModalBtn = (Modal) => {
+    Modal.style.display = "none"
 }
 
-function addTaskToOtherStreaks(task) {
-    // Create a new task element
-    const taskElement = document.createElement('div');
-    taskElement.classList.add('task');
-    taskElement.dataset.date = task.date;
-    // Set the task content
-    taskElement.innerHTML = `
-      <img src="${task.image}" alt="Task Image">
-      <h4>${task.name}</h4>
-      <p>${task.date}</p>
-    `;
-  
-    // Add the task to the other streaks section
-    activitySection.appendChild(taskElement);
-    createModal();
+const delModalBtn = (Modal,id) => {
+    Modal.style.display = "none"
+    const taskElements = document.querySelectorAll(`#${CSS.escape(id)}`);
+    console.log(taskElements);
+
+    taskElements.forEach((item)=>{
+        item.remove()
+    })
+    delUrl = `./delete.php?taskid=${encodeURIComponent(id)}`;
+    window.location.href = delUrl;
 }
+
+const updateform = (Modal, form, id) => {
+    console.log("User clicked");
+    form.style.cssText = "display: grid; position: absolute;";
+    Modal.style.display = "none";
+    updateUrl = `./retrieve.php?taskid=${encodeURIComponent(id)}`;
+    window.location.href = updateUrl;
+}
+
+// function addTaskToOtherStreaks(task) {
+//     // Create a new task element
+//     const taskElement = document.createElement('div');
+//     taskElement.classList.add('sep');
+//     taskElement.dataset.date = task.date;
+//     taskElement.setAttribute('id', task.id);
+//     // Set the task content
+//     taskElement.innerHTML = `
+//     <img src="${task.image}" alt="Task Image">
+//     <h4>${task.name}</h4>
+//     <p>${task.date}</p>
+//     `;
+
+//     // Add the task to the other streaks section
+//     activitySection.appendChild(taskElement);
+//     createModal();
+// }
   
 function calculateNoOfDays(taskDate) {
     let currentDate = new Date().getTime();
@@ -184,12 +192,3 @@ function calculateNoOfDays(taskDate) {
     }
     return days;
 }
-
-function clearForm() {
-    document.querySelector("#task-name").value.value = '',
-    document.querySelector("#im").value.value = '',
-    document.querySelector("#date").value.value = ''
-
-    return true;
-}
-
